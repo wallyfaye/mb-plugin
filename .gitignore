@@ -1,0 +1,5 @@
+node_modules/
+.sass-cache/
+dist/dist/
+yarn-error.log
+sftp-config.json
