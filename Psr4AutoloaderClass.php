@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate;
+namespace PHP_FIG;
 
 /**
  * An example of a general-purpose implementation that includes the optional
