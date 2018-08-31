@@ -2,5 +2,9 @@
 	{
 		"plural": "People",
 		"singular": "Person"
+	},
+	{
+		"plural": "Books",
+		"singular": "Book"
 	}
 ]

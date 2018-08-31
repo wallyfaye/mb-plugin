@@ -3,3 +3,4 @@ node_modules/
 dist/dist/
 yarn-error.log
 sftp-config.json
+.DS_Store

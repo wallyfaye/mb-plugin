@@ -19,15 +19,11 @@
 
 	// include class autoloader
 		require __DIR__ . '/vendor/autoload.php';
+		use Boilerplate\Boilerplate;
 
-	// resource variables
-		$plugin_models = __DIR__ . '/src/models.json';
+		$bp = new Boilerplate(array(
+			'models_file' => __DIR__ . '/src/models.json'
+		));
 
-	// load json models
-		$model_json = new \Boilerplate\JsonLoader\JsonFileParser($plugin_models);
-		if($model_json->json_file_parsed != true){
-			exit("error with models.json");
-		}
-
-		print_r($model_json->json_data);
-		die();
+		$bp->readModelsFile();
+		$bp->buildPostTypes();
