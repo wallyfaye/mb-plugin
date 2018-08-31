@@ -1,7 +1,8 @@
 <?php
 
 	namespace Boilerplate\PostTypeManager;
-	use Boilerplate\Helpers\Slugify;
+  use Boilerplate\Helpers\Slugify;
+  use Boilerplate\MetaBoxManager\MetaBoxBuilder;
 
 	class PostTypeBuilder{
 
@@ -10,6 +11,8 @@
 		public function __construct($models = null){
 			if($models != NULL){
 				$this->models = $models;
+        $GLOBALS['bpPlugin']['bpPostTypes'] = array();
+        $GLOBALS['bpPlugin']['bpMetaBoxes'] = array();
 			}
 		}
 
@@ -59,7 +62,7 @@
 			$post_type_schema['plural_slug'] = $plural_slug;
 			$GLOBALS['bpPlugin']['bpPostTypes'][] = $post_type_schema;
 
-			add_action( 'init', function(){
+			add_action('init', function(){
 
 				$i = 0;
 
@@ -68,14 +71,21 @@
 					&& post_type_exists($GLOBALS['bpPlugin']['bpPostTypes'][$i]['plural_slug']) === false
 				){
 
-					$this_pt = $GLOBALS['bpPlugin']['bpPostTypes'][$i];
+					$this_post_type = $GLOBALS['bpPlugin']['bpPostTypes'][$i];
 
           $this->createPostType(array(
-            'plural' => $this_pt['plural'],
-            'plural_slug' => $this_pt['plural_slug'],
-            'singular' => $this_pt['singular'],
-            'supports' => $this_pt['supports']
+            'plural' => $this_post_type['plural'],
+            'plural_slug' => $this_post_type['plural_slug'],
+            'singular' => $this_post_type['singular'],
+            'supports' => $this_post_type['supports']
           ));
+
+          $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
+
+          foreach ($mb_builder->fields as $key_fields => $value_fields) {
+            $value_fields['post_type'] = $this_post_type['plural'];
+            $mb_builder->createMetaBox($value_fields);
+          }
 
 					$i++;
 

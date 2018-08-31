@@ -10,6 +10,20 @@
       "excerpt",
       "comments",
       "revisions"
+    ],
+    "fields": [
+      {
+        "field_slug": "people_first_name",
+        "field_proper": "First Name",
+        "type": "input_text",
+        "position": "side"
+      },
+      {
+        "field_slug": "people_last_name",
+        "field_proper": "Last Name",
+        "type": "input_text",
+        "position": "side"
+      }
     ]
 	},
 	{
@@ -23,6 +37,13 @@
       "excerpt",
       "comments",
       "revisions"
+    ],
+    "fields": [
+      {
+        "field_slug": "books_author",
+        "field_proper": "Author",
+        "type": "input_text"
+      }
     ]
 	}
 ]

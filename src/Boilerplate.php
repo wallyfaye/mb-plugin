@@ -25,8 +25,6 @@
 		{
 			$pt_builder = new PostTypeBuilder($this->models_array);
 
-			$GLOBALS['bpPlugin']['bpPostTypes'] = array();
-
 			foreach ($pt_builder->models as $key_model => $value_model) {
 				$pt_builder->buildPostType($value_model);
 			}
