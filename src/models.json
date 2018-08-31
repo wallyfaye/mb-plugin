@@ -1,10 +1,28 @@
 [
 	{
 		"plural": "People",
-		"singular": "Person"
+		"singular": "Person",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "comments",
+      "revisions"
+    ]
 	},
 	{
 		"plural": "Books",
-		"singular": "Book"
+		"singular": "Book",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "comments",
+      "revisions"
+    ]
 	}
 ]

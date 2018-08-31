@@ -13,13 +13,53 @@
 			}
 		}
 
+    private function createPostType($params = array()){
+
+      $plural = $params['plural'];
+      $plural_slug = $params['plural_slug'];
+      $singular = $params['singular'];
+      $supports = $params['supports'];
+
+      register_post_type( $plural_slug, array(
+        'labels' => array(
+          'name' => _x( $plural, 'post type general name', 'bp-plugin-textdomain' ),
+          'singular_name' => _x( $singular, 'post type singular name', 'bp-plugin-textdomain' ),
+          'menu_name' => _x( $plural, 'admin menu', 'bp-plugin-textdomain' ),
+          'name_admin_bar' => _x( $singular, 'add new on admin bar', 'bp-plugin-textdomain' ),
+          'add_new' => _x( 'Add New', $plural_slug, 'bp-plugin-textdomain' ),
+          'add_new_item' => __( 'Add New ' . $singular, 'bp-plugin-textdomain' ),
+          'new_item' => __( 'New ' . $singular, 'bp-plugin-textdomain' ),
+          'edit_item' => __( 'Edit ' . $singular, 'bp-plugin-textdomain' ),
+          'view_item' => __( 'View ' . $singular, 'bp-plugin-textdomain' ),
+          'all_items' => __( 'All ' . $plural, 'bp-plugin-textdomain' ),
+          'search_items' => __( 'Search ' . $plural, 'bp-plugin-textdomain' ),
+          'parent_item_colon' => __( 'Parent ' . $plural . ':', 'bp-plugin-textdomain' ),
+          'not_found' => __( 'No ' . strtolower($plural) . ' found.', 'bp-plugin-textdomain' ),
+          'not_found_in_trash' => __( 'No ' . strtolower($plural) . ' found in Trash.', 'bp-plugin-textdomain' )
+        ),
+        'description' => __( 'Description.', 'bp-plugin-textdomain' ),
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => $plural_slug ),
+        'capability_type' => 'post',
+        'has_archive' => true,
+        'hierarchical' => false,
+        'menu_position' => null,
+        'supports' => $supports
+      ));
+
+    }
+
 		public function buildPostType($post_type_schema = array()){
 
 			$plural_slug = Slugify::getSlug($post_type_schema['plural']);
 			$post_type_schema['plural_slug'] = $plural_slug;
 			$GLOBALS['bpPlugin']['bpPostTypes'][] = $post_type_schema;
 
-			add_action( 'init', function($someVar = 'test'){
+			add_action( 'init', function(){
 
 				$i = 0;
 
@@ -29,42 +69,13 @@
 				){
 
 					$this_pt = $GLOBALS['bpPlugin']['bpPostTypes'][$i];
-					$plural = $this_pt['plural'];
-					$plural_slug = $this_pt['plural_slug'];
-					$singular = $this_pt['singular'];
 
-					$args = array(
-						'labels' => array(
-							'name' => _x( $plural, 'post type general name', 'your-plugin-textdomain' ),
-							'singular_name' => _x( $singular, 'post type singular name', 'your-plugin-textdomain' ),
-							'menu_name' => _x( $plural, 'admin menu', 'your-plugin-textdomain' ),
-							'name_admin_bar' => _x( $singular, 'add new on admin bar', 'your-plugin-textdomain' ),
-							'add_new' => _x( 'Add New', $plural_slug, 'your-plugin-textdomain' ),
-							'add_new_item' => __( 'Add New ' . $singular, 'your-plugin-textdomain' ),
-							'new_item' => __( 'New ' . $singular, 'your-plugin-textdomain' ),
-							'edit_item' => __( 'Edit ' . $singular, 'your-plugin-textdomain' ),
-							'view_item' => __( 'View ' . $singular, 'your-plugin-textdomain' ),
-							'all_items' => __( 'All ' . $plural, 'your-plugin-textdomain' ),
-							'search_items' => __( 'Search ' . $plural, 'your-plugin-textdomain' ),
-							'parent_item_colon' => __( 'Parent ' . $plural . ':', 'your-plugin-textdomain' ),
-							'not_found' => __( 'No ' . strtolower($plural) . ' found.', 'your-plugin-textdomain' ),
-							'not_found_in_trash' => __( 'No ' . strtolower($plural) . ' found in Trash.', 'your-plugin-textdomain' )
-						),
-						'description' => __( 'Description.', 'your-plugin-textdomain' ),
-						'public' => true,
-						'publicly_queryable' => true,
-						'show_ui' => true,
-						'show_in_menu' => true,
-						'query_var' => true,
-						'rewrite' => array( 'slug' => $plural_slug ),
-						'capability_type' => 'post',
-						'has_archive' => true,
-						'hierarchical' => false,
-						'menu_position' => null,
-						'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions' )
-					);
-
-					register_post_type( $plural_slug, $args );
+          $this->createPostType(array(
+            'plural' => $this_pt['plural'],
+            'plural_slug' => $this_pt['plural_slug'],
+            'singular' => $this_pt['singular'],
+            'supports' => $this_pt['supports']
+          ));
 
 					$i++;
 
