@@ -47,8 +47,8 @@
 							'all_items' => __( 'All ' . $plural, 'your-plugin-textdomain' ),
 							'search_items' => __( 'Search ' . $plural, 'your-plugin-textdomain' ),
 							'parent_item_colon' => __( 'Parent ' . $plural . ':', 'your-plugin-textdomain' ),
-							'not_found' => __( 'No books found.', 'your-plugin-textdomain' ),
-							'not_found_in_trash' => __( 'No books found in Trash.', 'your-plugin-textdomain' )
+							'not_found' => __( 'No ' . strtolower($plural) . ' found.', 'your-plugin-textdomain' ),
+							'not_found_in_trash' => __( 'No ' . strtolower($plural) . ' found in Trash.', 'your-plugin-textdomain' )
 						),
 						'description' => __( 'Description.', 'your-plugin-textdomain' ),
 						'public' => true,
