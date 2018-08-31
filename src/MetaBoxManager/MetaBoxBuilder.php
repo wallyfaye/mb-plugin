@@ -59,25 +59,29 @@
 
       add_action('save_post', function(){
 
-        foreach ($GLOBALS['bpPlugin']['bpPostTypes'] as $key_bpPostTypes => $value_bpPostTypes) {
+        if(isset($_POST['post_type'])){
+          
+          foreach ($GLOBALS['bpPlugin']['bpPostTypes'] as $key_bpPostTypes => $value_bpPostTypes) {
 
-          if($value_bpPostTypes['plural_slug'] == $_POST['post_type']){
+            if($value_bpPostTypes['plural_slug'] == $_POST['post_type']){
 
-            foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
+              foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
 
-              $meta_box_id = $value_fields['field_slug'];
-              $meta_box_value = $_POST[$meta_box_id];
-              $post_ID = $_POST['post_ID'];
+                $meta_box_id = $value_fields['field_slug'];
+                $meta_box_value = $_POST[$meta_box_id];
+                $post_ID = $_POST['post_ID'];
 
-              if(isset($meta_box_value)){
+                if(isset($meta_box_value)){
 
-                update_post_meta( $post_ID, $meta_box_id, sanitize_text_field( $meta_box_value ) );
-                
+                  update_post_meta( $post_ID, $meta_box_id, sanitize_text_field( $meta_box_value ) );
+
+                }
+
               }
 
             }
 
-          }   
+          }
 
         }
 
