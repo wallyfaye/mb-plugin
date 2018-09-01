@@ -16,8 +16,8 @@
 <?php endif; ?>
 
 <script>
-  $(document).ready(function (argument) {
-    $(".<?php echo $field_slug; ?>").flatpickr({
+  jQuery(document).ready(function (argument) {
+    jQuery(".<?php echo $field_slug; ?>").flatpickr({
       enableTime: true,
       dateFormat: "m-d-Y H:i",
     });

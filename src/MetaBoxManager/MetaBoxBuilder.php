@@ -10,6 +10,7 @@
         'input_text' => false,
         'input_date' => false,
         'input_colorpicker' => false,
+        'input_editor' => false,
       );
     }
 
@@ -35,6 +36,11 @@
         case 'input_colorpicker':
           $input_colorpicker = new InputColorpicker($post_data, $meta_box_data);
           $input_colorpicker->render($include_lib);
+        break;
+
+        case 'input_editor':
+          $input_editor = new InputEditor($post_data, $meta_box_data);
+          $input_editor->render($include_lib);
         break;
 
       }

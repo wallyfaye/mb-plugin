@@ -32,6 +32,18 @@
           "rgb(95, 136, 211)"
         ],
         "type": "input_colorpicker"
+      },
+      {
+        "field_slug": "people_editor",
+        "field_proper": "Editor",
+        "type": "input_editor",
+        "position": "normal"
+      },
+      {
+        "field_slug": "people_editor2",
+        "field_proper": "Editor",
+        "type": "input_editor",
+        "position": "normal"
       }
     ]
 	},

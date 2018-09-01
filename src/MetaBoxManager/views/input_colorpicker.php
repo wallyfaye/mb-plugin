@@ -14,8 +14,8 @@
 <?php endif; ?>
 
 <script>
-  $(document).ready(function (argument) {
-    $(".<?php echo $field_slug; ?>").spectrum({
+  jQuery(document).ready(function (argument) {
+    jQuery(".<?php echo $field_slug; ?>").spectrum({
       showAlpha: true,
       preferredFormat: "rgb",
       showInput: true,
@@ -25,7 +25,7 @@
       palette: [<?php echo '"' . implode('","', $field_colors) . '"'; ?>],
       localStorageKey: "spectrum.admin<?php echo $field_slug; ?>",
       change: function(color){
-        $(this).val(color.toHexString());
+        jQuery(this).val(color.toHexString());
       }
     });
   });
