@@ -9,6 +9,7 @@
       $this->meta_box_lib_include = array(
         'input_text' => false,
         'input_date' => false,
+        'input_colorpicker' => false,
       );
     }
 
@@ -29,6 +30,11 @@
         case 'input_date':
           $input_date = new InputDate($post_data, $meta_box_data);
           $input_date->render($include_lib);
+        break;
+
+        case 'input_colorpicker':
+          $input_colorpicker = new InputColorpicker($post_data, $meta_box_data);
+          $input_colorpicker->render($include_lib);
         break;
 
       }

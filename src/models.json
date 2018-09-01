@@ -21,6 +21,17 @@
         "field_proper": "Date",
         "type": "input_date",
         "position": "side"
+      },
+      {
+        "field_slug": "people_color",
+        "field_proper": "Color",
+        "field_colors": [
+          "rgb(0, 59, 168)",
+          "rgb(102, 153, 51)",
+          "rgb(53, 109, 211)",
+          "rgb(95, 136, 211)"
+        ],
+        "type": "input_colorpicker"
       }
     ]
 	},
