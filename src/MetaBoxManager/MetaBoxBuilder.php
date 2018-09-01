@@ -6,21 +6,35 @@
 
     public function __construct($fields = array()){
       $this->fields = $fields;
+      $this->meta_box_lib_include = array(
+        'input_text' => false,
+        'input_date' => false,
+      );
     }
 
     private function generateMetaBox($post_data, $meta_box_data){
+      $include_lib = false;
+      if($this->meta_box_lib_include[$meta_box_data['type']] == false){
+        $this->meta_box_lib_include[$meta_box_data['type']] = true;
+        $include_lib = true;
+      }
+
       switch ($meta_box_data['type']) {
+
         case 'input_text':
           $input_text = new InputText($post_data, $meta_box_data);
-          $input_text->render();
+          $input_text->render($include_lib);
         break;
+
+        case 'input_date':
+          $input_date = new InputDate($post_data, $meta_box_data);
+          $input_date->render($include_lib);
+        break;
+
       }
     }
 
-    public function createMetaBox($params = array()){
-
-      $params['isset'] = false;
-      $GLOBALS['bpPlugin']['bpMetaBoxes'][] = $params;
+    private function addMetaBoxes(){
 
       add_action('add_meta_boxes', function(){
 
@@ -57,6 +71,10 @@
 
       });
 
+    }
+
+    private function savePost(){
+
       add_action('save_post', function(){
 
         if(isset($_POST['post_type'])){
@@ -67,13 +85,17 @@
 
               foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
 
-                $meta_box_id = $value_fields['field_slug'];
-                $meta_box_value = $_POST[$meta_box_id];
+                $meta_box_key = $value_fields['field_slug'];
+                $meta_box_value = $_POST[$meta_box_key];
                 $post_ID = $_POST['post_ID'];
 
                 if(isset($meta_box_value)){
 
-                  update_post_meta( $post_ID, $meta_box_id, sanitize_text_field( $meta_box_value ) );
+                  update_post_meta( 
+                    $post_ID, 
+                    $meta_box_key, 
+                    sanitize_text_field( $meta_box_value ) 
+                  );
 
                 }
 
@@ -86,6 +108,16 @@
         }
 
       });
+
+    }
+
+    public function createMetaBox($params = array()){
+
+      $params['isset'] = false;
+      $GLOBALS['bpPlugin']['bpMetaBoxes'][] = $params;
+
+      $this->addMetaBoxes();
+      $this->savePost();
 
     }
 

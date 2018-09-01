@@ -2,15 +2,7 @@
 	{
 		"plural": "People",
 		"singular": "Person",
-    "supports": [
-      "title",
-      "editor",
-      "author",
-      "thumbnail",
-      "excerpt",
-      "comments",
-      "revisions"
-    ],
+    "supports": [ "title", "editor", "author", "thumbnail", "excerpt", "comments", "revisions" ],
     "fields": [
       {
         "field_slug": "people_first_name",
@@ -23,21 +15,19 @@
         "field_proper": "Last Name",
         "type": "input_text",
         "position": "side"
+      },
+      {
+        "field_slug": "people_date",
+        "field_proper": "Date",
+        "type": "input_date",
+        "position": "side"
       }
     ]
 	},
 	{
 		"plural": "Books",
 		"singular": "Book",
-    "supports": [
-      "title",
-      "editor",
-      "author",
-      "thumbnail",
-      "excerpt",
-      "comments",
-      "revisions"
-    ],
+    "supports": [ "title", "editor", "author", "thumbnail", "excerpt", "comments", "revisions" ],
     "fields": [
       {
         "field_slug": "books_author",
