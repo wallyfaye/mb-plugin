@@ -12,7 +12,8 @@
         'input_colorpicker' => false,
         'input_editor' => false,
         'input_featured_images' => false,
-        'input_checkbox_multi' => false
+        'input_checkbox_multi' => false,
+        'input_select' => false
       );
     }
 
@@ -61,6 +62,11 @@
         case 'input_checkbox_multi':
           $input_checkbox_multi = new InputCheckboxMulti($post_data, $meta_box_data);
           $input_checkbox_multi->render($include_lib);
+        break;
+
+        case 'input_select':
+          $input_select = new InputSelect($post_data, $meta_box_data);
+          $input_select->render($include_lib);
         break;
 
       }
@@ -118,10 +124,10 @@
               foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
 
                 $meta_box_key = $value_fields['field_slug'];
-                $meta_box_value = $_POST[$meta_box_key];
                 $post_ID = $_POST['post_ID'];
 
-                if(isset($meta_box_value)){
+                if(isset($_POST[$meta_box_key])){
+                  $meta_box_value = $_POST[$meta_box_key];
 
                   update_post_meta( 
                     $post_ID, 

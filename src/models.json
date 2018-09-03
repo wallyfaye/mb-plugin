@@ -74,6 +74,12 @@
           "field_proper": "Checkbox Multi",
           "field_post_type": "people",
           "type": "input_checkbox_multi"
+      },
+      {
+          "field_slug": "people_select",
+          "field_proper": "Select",
+          "field_post_type": "people",
+          "type": "input_select"
       }
     ]
 	},
