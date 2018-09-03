@@ -1,4 +1,4 @@
-# boilerplate plugin
+# model builder plugin
 
 code to get started quick
 
