@@ -80,6 +80,24 @@
           "field_proper": "Select",
           "field_post_type": "people",
           "type": "input_select"
+      },
+      {
+          "field_slug": "people_select2",
+          "field_proper": "Select",
+          "field_post_type": "people",
+          "type": "input_select"
+      },
+      {
+        "field_slug": "people_radio",
+        "field_proper": "Radio",
+        "field_post_type": "people",
+        "type": "input_radio"
+      },
+      {
+        "field_slug": "people_radio2",
+        "field_proper": "Radio",
+        "field_post_type": "people",
+        "type": "input_radio"
       }
     ]
 	},

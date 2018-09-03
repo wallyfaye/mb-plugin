@@ -13,7 +13,8 @@
         'input_editor' => false,
         'input_featured_images' => false,
         'input_checkbox_multi' => false,
-        'input_select' => false
+        'input_select' => false,
+        'input_radio' => false
       );
     }
 
@@ -69,6 +70,10 @@
           $input_select->render($include_lib);
         break;
 
+        case 'input_radio':
+          $input_radio = new InputRadio($post_data, $meta_box_data);
+          $input_radio->render($include_lib);
+        break;
       }
     }
 
