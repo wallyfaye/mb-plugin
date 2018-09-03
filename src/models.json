@@ -44,6 +44,12 @@
         "field_proper": "Editor",
         "type": "input_editor",
         "position": "normal"
+      },
+      {
+        "field_slug": "people_featured_images",
+        "field_proper": "Featured Images",
+        "type": "input_featured_images",
+        "position": "side"
       }
     ]
 	},

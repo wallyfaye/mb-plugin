@@ -7,26 +7,26 @@
 />
 
 <?php if ($include_lib): ?>
-
-<script src="<?php echo plugin_dir_url(__FILE__) . '../../../lib/spectrum/spectrum.min.js'; ?>"></script>
-<link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) . '../../../lib/spectrum/spectrum.min.css'; ?>">
-
+  <script src="<?php echo plugin_dir_url(__FILE__) . '../../../lib/spectrum/spectrum.min.js'; ?>"></script>
+  <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) . '../../../lib/spectrum/spectrum.min.css'; ?>">
 <?php endif; ?>
 
 <script>
-  jQuery(document).ready(function (argument) {
-    jQuery(".<?php echo $field_slug; ?>").spectrum({
-      showAlpha: true,
-      preferredFormat: "rgb",
-      showInput: true,
-      showInitial: true,
-      showPalette: true,
-      showSelectionPalette: true,
-      palette: [<?php echo '"' . implode('","', $field_colors) . '"'; ?>],
-      localStorageKey: "spectrum.admin<?php echo $field_slug; ?>",
-      change: function(color){
-        jQuery(this).val(color.toHexString());
-      }
+  (function($){
+    $(document).ready(function (argument) {
+      $(".<?php echo $field_slug; ?>").spectrum({
+        showAlpha: true,
+        preferredFormat: "rgb",
+        showInput: true,
+        showInitial: true,
+        showPalette: true,
+        showSelectionPalette: true,
+        palette: [<?php echo '"' . implode('","', $field_colors) . '"'; ?>],
+        localStorageKey: "spectrum.admin<?php echo $field_slug; ?>",
+        change: function(color){
+          $(this).val(color.toHexString());
+        }
+      });
     });
-  });
+  })(jQuery);
 </script>

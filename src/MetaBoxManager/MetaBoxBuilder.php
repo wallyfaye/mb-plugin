@@ -11,12 +11,16 @@
         'input_date' => false,
         'input_colorpicker' => false,
         'input_editor' => false,
+        'input_featured_images' => false
       );
     }
 
     private function generateMetaBox($post_data, $meta_box_data){
       $include_lib = false;
-      if($this->meta_box_lib_include[$meta_box_data['type']] == false){
+      if(
+        isset($this->meta_box_lib_include[$meta_box_data['type']]) 
+        && $this->meta_box_lib_include[$meta_box_data['type']] == false
+      ){
         $this->meta_box_lib_include[$meta_box_data['type']] = true;
         $include_lib = true;
       }
@@ -41,6 +45,11 @@
         case 'input_editor':
           $input_editor = new InputEditor($post_data, $meta_box_data);
           $input_editor->render($include_lib);
+        break;
+
+        case 'input_featured_images':
+          $input_featured_images = new InputFeaturedImages($post_data, $meta_box_data);
+          $input_featured_images->render($include_lib);
         break;
 
       }

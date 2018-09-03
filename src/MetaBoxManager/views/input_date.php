@@ -9,17 +9,17 @@
 />
 
 <?php if ($include_lib): ?>
-
-<script src="<?php echo plugin_dir_url(__FILE__) . '../../../lib/flatpickr/flatpickr.min.js'; ?>"></script>
-<link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) . '../../../lib/flatpickr/flatpickr.min.css'; ?>">
-
+  <script src="<?php echo plugin_dir_url(__FILE__) . '../../../lib/flatpickr/flatpickr.min.js'; ?>"></script>
+  <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) . '../../../lib/flatpickr/flatpickr.min.css'; ?>">
 <?php endif; ?>
 
 <script>
-  jQuery(document).ready(function (argument) {
-    jQuery(".<?php echo $field_slug; ?>").flatpickr({
-      enableTime: true,
-      dateFormat: "m-d-Y H:i",
+  (function($){
+    $(document).ready(function (argument) {
+      $(".<?php echo $field_slug; ?>").flatpickr({
+        enableTime: true,
+        dateFormat: "m-d-Y H:i",
+      });
     });
-  });
+  })(jQuery);
 </script>
