@@ -1,5 +1,5 @@
 {
-    "name": "Boilerplate",
+    "name": "ModelBuilder",
     "authors": [
         {
             "name": "Wally Faye"
@@ -13,7 +13,7 @@
     },
     "autoload": {
     	"psr-4": {
-    		"Boilerplate\\": "src/"
+    		"ModelBuilder\\": "src/"
     	}
     }
 }

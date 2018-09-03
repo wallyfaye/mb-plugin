@@ -1,6 +1,6 @@
 <?php
 
-  namespace Boilerplate\MetaBoxManager;
+  namespace ModelBuilder\MetaBoxManager;
 
   class InputText{
 

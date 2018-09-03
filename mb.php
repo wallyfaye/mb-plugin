@@ -1,8 +1,8 @@
 <?php
 
 	/**
-		 * @package Wordpress_BP
-		 * @version 0.1
+		 * @package Model_Builder
+		 * @version 0.2
 	*/
 	/*
 		Plugin Name: Model Builder
@@ -19,9 +19,9 @@
 
 	// include class autoloader
 		require __DIR__ . '/vendor/autoload.php';
-		use Boilerplate\Boilerplate;
+		use ModelBuilder\ModelBuilder;
 
-		$bp = new Boilerplate(array(
+		$bp = new ModelBuilder(array(
 			'models_file' => __DIR__ . '/src/models.json'
 		));
 

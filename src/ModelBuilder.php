@@ -1,11 +1,11 @@
 <?php
 
-	namespace Boilerplate;
+	namespace ModelBuilder;
 
-	use Boilerplate\JsonLoader\JsonFileParser;
-	use Boilerplate\PostTypeManager\PostTypeBuilder;
+	use ModelBuilder\JsonLoader\JsonFileParser;
+	use ModelBuilder\PostTypeManager\PostTypeBuilder;
 
-	class Boilerplate{
+	class ModelBuilder{
 
 		public function __construct($params = array()) 
 		{

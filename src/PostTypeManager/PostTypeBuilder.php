@@ -1,8 +1,8 @@
 <?php
 
-	namespace Boilerplate\PostTypeManager;
-  use Boilerplate\Helpers\Slugify;
-  use Boilerplate\MetaBoxManager\MetaBoxBuilder;
+	namespace ModelBuilder\PostTypeManager;
+  use ModelBuilder\Helpers\Slugify;
+  use ModelBuilder\MetaBoxManager\MetaBoxBuilder;
 
 	class PostTypeBuilder{
 

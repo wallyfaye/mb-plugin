@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate\Helpers;
+namespace ModelBuilder\Helpers;
 
 	class Slugify{
 

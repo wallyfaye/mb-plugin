@@ -1,6 +1,6 @@
 <?php
 
-namespace Boilerplate\JsonLoader;
+namespace ModelBuilder\JsonLoader;
 
 	class JsonFileParser{
 
