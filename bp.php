@@ -5,11 +5,11 @@
 		 * @version 0.1
 	*/
 	/*
-		Plugin Name: Wordpress Boilerplate
+		Plugin Name: Wordpress Model Builder
 		Plugin URI: https://github.com/wallyfaye/bp
-		Description: This is meant to be used to get projects started quickly
+		Description: Create custom post types with meta boxes and REST API endpoints
 		Author: Wally Faye
-		Version: 0.1
+		Version: 0.2
 		Author URI: https://github.com/wallyfaye
 	*/
 
