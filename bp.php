@@ -5,7 +5,7 @@
 		 * @version 0.1
 	*/
 	/*
-		Plugin Name: Wordpress Model Builder
+		Plugin Name: Model Builder
 		Plugin URI: https://github.com/wallyfaye/bp
 		Description: Create custom post types with meta boxes and REST API endpoints
 		Author: Wally Faye
