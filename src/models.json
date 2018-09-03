@@ -58,10 +58,10 @@
         "position": "side"
       },
       {
-          "field_slug": "people_checkbox_single",
-          "field_proper": "Sample Checkbox Single",
-          "field_text": "Is Checked?",
-          "type": "input_checkbox_single"
+        "field_slug": "people_checkbox_single",
+        "field_proper": "Sample Checkbox Single",
+        "field_text": "Is Checked?",
+        "type": "input_checkbox_single"
       }
     ]
 	},
