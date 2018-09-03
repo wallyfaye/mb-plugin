@@ -59,9 +59,21 @@
       },
       {
         "field_slug": "people_checkbox_single",
-        "field_proper": "Sample Checkbox Single",
+        "field_proper": "Checkbox Single",
         "field_text": "Is Checked?",
         "type": "input_checkbox_single"
+      },
+      {
+          "field_slug": "people_checkbox_multi",
+          "field_proper": "Checkbox Multi",
+          "field_post_type": "people",
+          "type": "input_checkbox_multi"
+      },
+      {
+          "field_slug": "people_checkbox_multi2",
+          "field_proper": "Checkbox Multi",
+          "field_post_type": "people",
+          "type": "input_checkbox_multi"
       }
     ]
 	},

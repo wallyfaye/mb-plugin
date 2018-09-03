@@ -11,7 +11,8 @@
         'input_date' => false,
         'input_colorpicker' => false,
         'input_editor' => false,
-        'input_featured_images' => false
+        'input_featured_images' => false,
+        'input_checkbox_multi' => false
       );
     }
 
@@ -55,6 +56,11 @@
         case 'input_checkbox_single':
           $input_checkbox_single = new InputCheckboxSingle($post_data, $meta_box_data);
           $input_checkbox_single->render($include_lib);
+        break;
+
+        case 'input_checkbox_multi':
+          $input_checkbox_multi = new InputCheckboxMulti($post_data, $meta_box_data);
+          $input_checkbox_multi->render($include_lib);
         break;
 
       }
@@ -104,7 +110,7 @@
       add_action('save_post', function(){
 
         if(isset($_POST['post_type'])){
-          
+
           foreach ($GLOBALS['bpPlugin']['bpPostTypes'] as $key_bpPostTypes => $value_bpPostTypes) {
 
             if($value_bpPostTypes['plural_slug'] == $_POST['post_type']){
@@ -120,7 +126,7 @@
                   update_post_meta( 
                     $post_ID, 
                     $meta_box_key, 
-                    sanitize_text_field( $meta_box_value ) 
+                    (gettype($meta_box_value) === 'string') ? sanitize_text_field($meta_box_value) : $meta_box_value
                   );
 
                 } else {
@@ -152,6 +158,31 @@
 
       $this->addMetaBoxes();
       $this->savePost();
+
+      $GLOBALS['bpPlugin']['bpRestFields'][] = $params;
+      add_action('rest_api_init', function(){
+
+        $i = 0;
+
+        while(
+          isset($GLOBALS['bpPlugin']['bpRestFields'][$i]) 
+          && $GLOBALS['bpPlugin']['bpRestFields'][$i]['isset'] === false
+        ){
+
+          $this_rest_field = $GLOBALS['bpPlugin']['bpRestFields'][$i];
+
+          register_rest_field( $this_rest_field['post_type'], $this_rest_field['field_slug'], array(
+            'get_callback' => function($object, $field_name){
+              return get_post_meta( $object['id'], $field_name, true);
+            }
+          ));
+
+          $GLOBALS['bpPlugin']['bpRestFields'][$i]['isset'] = true;
+          $i++;
+
+        }
+
+      });
 
     }
 

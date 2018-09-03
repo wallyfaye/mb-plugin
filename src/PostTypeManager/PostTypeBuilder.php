@@ -13,6 +13,7 @@
 				$this->models = $models;
         $GLOBALS['bpPlugin']['bpPostTypes'] = array();
         $GLOBALS['bpPlugin']['bpMetaBoxes'] = array();
+        $GLOBALS['bpPlugin']['bpRestFields'] = array();
 			}
 		}
 
@@ -24,6 +25,7 @@
       $supports = $params['supports'];
 
       register_post_type( $plural_slug, array(
+        'show_in_rest' => true,
         'labels' => array(
           'name' => _x( $plural, 'post type general name', 'bp-plugin-textdomain' ),
           'singular_name' => _x( $singular, 'post type singular name', 'bp-plugin-textdomain' ),
@@ -83,7 +85,7 @@
           $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
 
           foreach ($mb_builder->fields as $key_fields => $value_fields) {
-            $value_fields['post_type'] = $this_post_type['plural'];
+            $value_fields['post_type'] = $this_post_type['plural_slug'];
             $mb_builder->createMetaBox($value_fields);
           }
 
