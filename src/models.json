@@ -50,6 +50,18 @@
         "field_proper": "Featured Images",
         "type": "input_featured_images",
         "position": "side"
+      },
+      {
+        "field_slug": "people_featured_images2",
+        "field_proper": "Featured Images",
+        "type": "input_featured_images",
+        "position": "side"
+      },
+      {
+          "field_slug": "people_checkbox_single",
+          "field_proper": "Sample Checkbox Single",
+          "field_text": "Is Checked?",
+          "type": "input_checkbox_single"
       }
     ]
 	},

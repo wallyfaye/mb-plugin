@@ -52,6 +52,11 @@
           $input_featured_images->render($include_lib);
         break;
 
+        case 'input_checkbox_single':
+          $input_checkbox_single = new InputCheckboxSingle($post_data, $meta_box_data);
+          $input_checkbox_single->render($include_lib);
+        break;
+
       }
     }
 
@@ -116,6 +121,14 @@
                     $post_ID, 
                     $meta_box_key, 
                     sanitize_text_field( $meta_box_value ) 
+                  );
+
+                } else {
+
+                  update_post_meta( 
+                    $post_ID, 
+                    $meta_box_key, 
+                    ''
                   );
 
                 }
