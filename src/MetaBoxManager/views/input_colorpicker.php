@@ -17,6 +17,7 @@
       $(".<?php echo $field_slug; ?>").spectrum({
         showAlpha: true,
         preferredFormat: "rgb",
+        allowEmpty: true,
         showInput: true,
         showInitial: true,
         showPalette: true,
@@ -24,7 +25,9 @@
         palette: [<?php echo '"' . implode('","', $field_colors) . '"'; ?>],
         localStorageKey: "spectrum.admin<?php echo $field_slug; ?>",
         change: function(color){
-          $(this).val(color.toHexString());
+          if(color != null){
+            $(this).val(color.toHexString());
+          }
         }
       });
     });
