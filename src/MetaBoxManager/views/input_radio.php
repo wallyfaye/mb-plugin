@@ -14,7 +14,8 @@
         targetElement: $(".radio_container.<?php echo $field_slug; ?>"),
         postType: '<?php echo $field_post_type; ?>',
         fieldSlug: '<?php echo $field_slug; ?>',
-        savedValue: '<?php echo $saved_value; ?>'
+        savedValue: '<?php echo $saved_value; ?>',
+        fieldData: JSON.parse('<?php echo json_encode($field_function); ?>')
       });
 
     })

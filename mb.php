@@ -27,3 +27,21 @@
 
 		$bp->readModelsFile();
 		$bp->buildPostTypes();
+
+		function list_content_box_functions(){
+			$render_array = array(
+				array(
+					"id" => "id1",
+					"title" => "Some element 1",
+				),
+				array(
+					"id" => "id2",
+					"title" => "Some element 2",
+				),
+				array(
+					"id" => "id3",
+					"title" => "Some element 3",
+				),
+			);
+			return $render_array;
+		}

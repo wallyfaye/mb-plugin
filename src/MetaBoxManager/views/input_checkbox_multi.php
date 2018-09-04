@@ -14,7 +14,8 @@
         targetElement: $(".checkbox_container.<?php echo $field_slug; ?>"),
         postType: '<?php echo $field_post_type; ?>',
         fieldSlug: '<?php echo $field_slug; ?>',
-        savedValue: JSON.parse('<?php echo $saved_value; ?>')
+        savedValue: JSON.parse('<?php echo $saved_value; ?>'),
+        fieldData: JSON.parse('<?php echo json_encode($field_function); ?>')
       });
 
     })
