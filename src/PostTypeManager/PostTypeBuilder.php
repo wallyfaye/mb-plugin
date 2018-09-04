@@ -3,6 +3,7 @@
 	namespace ModelBuilder\PostTypeManager;
   use ModelBuilder\Helpers\Slugify;
   use ModelBuilder\MetaBoxManager\MetaBoxBuilder;
+  use ModelBuilder\PagesManager\SubmenuPage;
 
 	class PostTypeBuilder{
 
@@ -71,6 +72,7 @@
           break;
           
           case 'pages':
+          
             $mb_builder = new MetaBoxBuilder($post_type_schema['fields']);
 
             foreach ($post_type_schema['supports'] as $key_supports => $value_supports) {
@@ -81,9 +83,11 @@
               $value_fields['post_type'] = 'page';
               $mb_builder->createMetaBox($value_fields);
             }
+
           break;
           
           default:
+
             $this->createPostType(array(
               'plural' => $post_type_schema['plural'],
               'plural_slug' => $post_type_schema['plural_slug'],
@@ -97,6 +101,15 @@
               $value_fields['post_type'] = $post_type_schema['plural_slug'];
               $mb_builder->createMetaBox($value_fields);
             }
+
+            $mb_builder->registerRestField($post_type_schema['plural_slug'], 'custom_order');
+
+            $submenu_page = new SubmenuPage(array(
+              'post_type_schema' => $post_type_schema
+            ));
+
+            $submenu_page->renderPage();
+
           break;
         }
 

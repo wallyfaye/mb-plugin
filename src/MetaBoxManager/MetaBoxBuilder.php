@@ -131,26 +131,36 @@
 
           }
 
+          if(empty(get_post_meta($post_ID, 'custom_order'))){
+            update_post_meta($post_ID, "custom_order", '-1');
+          }
+
         }
 
       });
 
     }
 
-    public function createMetaBox($params = array()){
+    public function registerRestField($postType, $fieldSlug){
+      add_action('rest_api_init', function() use ($postType, $fieldSlug){
 
-      $this->addMetaBoxes($params);
-      $this->savePost($params);
-
-      add_action('rest_api_init', function() use ($params){
-
-        register_rest_field( $params['post_type'], $params['field_slug'], array(
+        register_rest_field( $postType, $fieldSlug, array(
           'get_callback' => function($object, $field_name){
             return get_post_meta( $object['id'], $field_name, true);
+          },
+          'update_callback' => function($newValue, $object, $field){
+            return update_post_meta($object->ID, $field, $newValue);
           }
         ));
 
       });
+    }
+
+    public function createMetaBox($params = array()){
+
+      $this->addMetaBoxes($params);
+      $this->savePost($params);
+      $this->registerRestField($params['post_type'], $params['field_slug']);
 
     }
 
