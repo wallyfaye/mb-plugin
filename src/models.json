@@ -1,5 +1,17 @@
 [
   {
+    "plural": "Users",
+    "singular": "User",
+    "fields": [
+      {
+        "field_slug": "pages_text",
+        "field_proper": "Text",
+        "type": "input_text",
+        "position": "side"
+      }
+    ]
+  },
+  {
     "plural": "Pages",
     "singular": "Page",
     "supports": [ "title", "editor", "author", "thumbnail", "excerpt", "comments", "revisions" ],

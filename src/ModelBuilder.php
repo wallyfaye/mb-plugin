@@ -9,7 +9,6 @@
 
 		public function __construct($params = array()) 
 		{
-			$GLOBALS['bpPlugin'] = array();
 			$this->models_file = $params['models_file'];
 		}
 

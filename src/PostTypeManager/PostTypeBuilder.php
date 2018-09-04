@@ -11,9 +11,6 @@
 		public function __construct($models = null){
 			if($models != NULL){
 				$this->models = $models;
-        $GLOBALS['bpPlugin']['bpPostTypes'] = array();
-        $GLOBALS['bpPlugin']['bpMetaBoxes'] = array();
-        $GLOBALS['bpPlugin']['bpRestFields'] = array();
 			}
 		}
 
@@ -58,57 +55,53 @@
 
     }
 
+    public function bpExtraProfileFields()
+    {
+      echo '123';
+    }
+
 		public function buildPostType($post_type_schema = array()){
 
 			$plural_slug = Slugify::getSlug($post_type_schema['plural']);
 			$post_type_schema['plural_slug'] = $plural_slug;
-			$GLOBALS['bpPlugin']['bpPostTypes'][] = $post_type_schema;
 
-			add_action('init', function(){
+			add_action('init', function() use ($post_type_schema) {
 
-				$i = 0;
+        switch ($post_type_schema['plural_slug']) {
+          case 'users':
+            add_action( 'show_user_profile', array( $this, 'bpExtraProfileFields' ) );
+            add_action( 'edit_user_profile', array( $this, 'bpExtraProfileFields' ) );
+          break;
+          
+          case 'pages':
+            $mb_builder = new MetaBoxBuilder($post_type_schema['fields']);
 
-				while(
-					isset($GLOBALS['bpPlugin']['bpPostTypes'][$i]) 
-					&& post_type_exists($GLOBALS['bpPlugin']['bpPostTypes'][$i]['plural_slug']) === false
-				){
+            foreach ($post_type_schema['supports'] as $key_supports => $value_supports) {
+              add_post_type_support('page', $value_supports);
+            }
 
-					$this_post_type = $GLOBALS['bpPlugin']['bpPostTypes'][$i];
+            foreach ($mb_builder->fields as $key_fields => $value_fields) {
+              $value_fields['post_type'] = 'page';
+              $mb_builder->createMetaBox($value_fields);
+            }
+          break;
+          
+          default:
+            $this->createPostType(array(
+              'plural' => $post_type_schema['plural'],
+              'plural_slug' => $post_type_schema['plural_slug'],
+              'singular' => $post_type_schema['singular'],
+              'supports' => $post_type_schema['supports']
+            ));
 
-          switch ($this_post_type['plural_slug']) {
-            case 'pages':
-              $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
+            $mb_builder = new MetaBoxBuilder($post_type_schema['fields']);
 
-              foreach ($this_post_type['supports'] as $key_supports => $value_supports) {
-                add_post_type_support('page', $value_supports);
-              }
-
-              foreach ($mb_builder->fields as $key_fields => $value_fields) {
-                $value_fields['post_type'] = 'page';
-                $mb_builder->createMetaBox($value_fields);
-              }
-            break;
-            
-            default:
-              $this->createPostType(array(
-                'plural' => $this_post_type['plural'],
-                'plural_slug' => $this_post_type['plural_slug'],
-                'singular' => $this_post_type['singular'],
-                'supports' => $this_post_type['supports']
-              ));
-
-              $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
-
-              foreach ($mb_builder->fields as $key_fields => $value_fields) {
-                $value_fields['post_type'] = $this_post_type['plural_slug'];
-                $mb_builder->createMetaBox($value_fields);
-              }
-            break;
-          }
-
-					$i++;
-
-				}
+            foreach ($mb_builder->fields as $key_fields => $value_fields) {
+              $value_fields['post_type'] = $post_type_schema['plural_slug'];
+              $mb_builder->createMetaBox($value_fields);
+            }
+          break;
+        }
 
 			});
 

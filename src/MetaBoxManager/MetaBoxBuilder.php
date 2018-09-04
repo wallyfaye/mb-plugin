@@ -77,84 +77,57 @@
       }
     }
 
-    private function addMetaBoxes(){
+    private function addMetaBoxes($params){
 
-      add_action('add_meta_boxes', function(){
+      add_action('add_meta_boxes', function() use ($params){
 
-        $i = 0;
+        $field_slug = $params['field_slug'];
+        $field_proper = $params['field_proper'];
+        $type = $params['type'];
+        $post_type = $params['post_type'];
+        $position = isset($params['position']) ? $params['position'] : 'side';
 
-        while(
-          isset($GLOBALS['bpPlugin']['bpMetaBoxes'][$i]) 
-          && $GLOBALS['bpPlugin']['bpMetaBoxes'][$i]['isset'] === false
-        ){
-
-          $this_meta_box = $GLOBALS['bpPlugin']['bpMetaBoxes'][$i];
-
-          $field_slug = $this_meta_box['field_slug'];
-          $field_proper = $this_meta_box['field_proper'];
-          $type = $this_meta_box['type'];
-          $post_type = $this_meta_box['post_type'];
-          $position = isset($this_meta_box['position']) ? $this_meta_box['position'] : 'side';
-
-          add_meta_box(
-            $field_slug,
-            $field_proper,
-            function($post, $arguments){
-              $this->generateMetaBox($post, $arguments['args']);
-            },
-            $post_type,
-            $position,
-            'default',
-            $this_meta_box
-          );
-
-          $i++;
-
-        }
+        add_meta_box(
+          $field_slug,
+          $field_proper,
+          function($post, $arguments){
+            $this->generateMetaBox($post, $arguments['args']);
+          },
+          $post_type,
+          $position,
+          'default',
+          $params
+        );
 
       });
 
     }
 
-    private function savePost(){
+    private function savePost($params){
 
-      add_action('save_post', function(){
+      add_action('save_post', function() use ($params){
 
         if(isset($_POST['post_type'])){
 
-          foreach ($GLOBALS['bpPlugin']['bpPostTypes'] as $key_bpPostTypes => $value_bpPostTypes) {
+          $meta_box_key = $params['field_slug'];
+          $post_ID = $_POST['post_ID'];
 
-            if($value_bpPostTypes['plural_slug'] == $_POST['post_type'] ||
-              ($value_bpPostTypes['plural_slug'] == 'pages' && $_POST['post_type'] == 'page')
-            ){
+          if(isset($_POST[$meta_box_key])){
+            $meta_box_value = $_POST[$meta_box_key];
 
-              foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
+            update_post_meta( 
+              $post_ID, 
+              $meta_box_key, 
+              (gettype($meta_box_value) === 'string') ? sanitize_text_field($meta_box_value) : $meta_box_value
+            );
 
-                $meta_box_key = $value_fields['field_slug'];
-                $post_ID = $_POST['post_ID'];
+          } else {
 
-                if(isset($_POST[$meta_box_key])){
-                  $meta_box_value = $_POST[$meta_box_key];
-
-                  update_post_meta( 
-                    $post_ID, 
-                    $meta_box_key, 
-                    (gettype($meta_box_value) === 'string') ? sanitize_text_field($meta_box_value) : $meta_box_value
-                  );
-
-                } else {
-
-                  update_post_meta( 
-                    $post_ID, 
-                    $meta_box_key, 
-                    ''
-                  );
-
-                }
-
-              }
-
-            }
+            update_post_meta( 
+              $post_ID, 
+              $meta_box_key, 
+              ''
+            );
 
           }
 
@@ -167,33 +140,17 @@
     public function createMetaBox($params = array()){
 
       $params['isset'] = false;
-      $GLOBALS['bpPlugin']['bpMetaBoxes'][] = $params;
 
-      $this->addMetaBoxes();
-      $this->savePost();
+      $this->addMetaBoxes($params);
+      $this->savePost($params);
 
-      $GLOBALS['bpPlugin']['bpRestFields'][] = $params;
-      add_action('rest_api_init', function(){
+      add_action('rest_api_init', function() use ($params){
 
-        $i = 0;
-
-        while(
-          isset($GLOBALS['bpPlugin']['bpRestFields'][$i]) 
-          && $GLOBALS['bpPlugin']['bpRestFields'][$i]['isset'] === false
-        ){
-
-          $this_rest_field = $GLOBALS['bpPlugin']['bpRestFields'][$i];
-
-          register_rest_field( $this_rest_field['post_type'], $this_rest_field['field_slug'], array(
-            'get_callback' => function($object, $field_name){
-              return get_post_meta( $object['id'], $field_name, true);
-            }
-          ));
-
-          $GLOBALS['bpPlugin']['bpRestFields'][$i]['isset'] = true;
-          $i++;
-
-        }
+        register_rest_field( $params['post_type'], $params['field_slug'], array(
+          'get_callback' => function($object, $field_name){
+            return get_post_meta( $object['id'], $field_name, true);
+          }
+        ));
 
       });
 
