@@ -75,18 +75,35 @@
 
 					$this_post_type = $GLOBALS['bpPlugin']['bpPostTypes'][$i];
 
-          $this->createPostType(array(
-            'plural' => $this_post_type['plural'],
-            'plural_slug' => $this_post_type['plural_slug'],
-            'singular' => $this_post_type['singular'],
-            'supports' => $this_post_type['supports']
-          ));
+          switch ($this_post_type['plural_slug']) {
+            case 'pages':
+              $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
 
-          $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
+              foreach ($this_post_type['supports'] as $key_supports => $value_supports) {
+                add_post_type_support('page', $value_supports);
+              }
 
-          foreach ($mb_builder->fields as $key_fields => $value_fields) {
-            $value_fields['post_type'] = $this_post_type['plural_slug'];
-            $mb_builder->createMetaBox($value_fields);
+              foreach ($mb_builder->fields as $key_fields => $value_fields) {
+                $value_fields['post_type'] = 'page';
+                $mb_builder->createMetaBox($value_fields);
+              }
+            break;
+            
+            default:
+              $this->createPostType(array(
+                'plural' => $this_post_type['plural'],
+                'plural_slug' => $this_post_type['plural_slug'],
+                'singular' => $this_post_type['singular'],
+                'supports' => $this_post_type['supports']
+              ));
+
+              $mb_builder = new MetaBoxBuilder($this_post_type['fields']);
+
+              foreach ($mb_builder->fields as $key_fields => $value_fields) {
+                $value_fields['post_type'] = $this_post_type['plural_slug'];
+                $mb_builder->createMetaBox($value_fields);
+              }
+            break;
           }
 
 					$i++;

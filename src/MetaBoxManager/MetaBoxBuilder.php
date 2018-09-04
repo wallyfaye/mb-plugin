@@ -124,7 +124,9 @@
 
           foreach ($GLOBALS['bpPlugin']['bpPostTypes'] as $key_bpPostTypes => $value_bpPostTypes) {
 
-            if($value_bpPostTypes['plural_slug'] == $_POST['post_type']){
+            if($value_bpPostTypes['plural_slug'] == $_POST['post_type'] ||
+              ($value_bpPostTypes['plural_slug'] == 'pages' && $_POST['post_type'] == 'page')
+            ){
 
               foreach ($value_bpPostTypes['fields'] as $key_fields => $value_fields) {
 
