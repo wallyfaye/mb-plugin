@@ -4,10 +4,105 @@
     "singular": "User",
     "fields": [
       {
-        "field_slug": "pages_text",
+        "field_slug": "users_text",
         "field_proper": "Text",
         "type": "input_text",
         "position": "side"
+      },
+      {
+        "field_slug": "users_first_name",
+        "field_proper": "First Name",
+        "type": "input_text",
+        "position": "side"
+      },
+      {
+        "field_slug": "users_last_name",
+        "field_proper": "Last Name",
+        "type": "input_text",
+        "position": "side"
+      },
+      {
+        "field_slug": "users_date",
+        "field_proper": "Date",
+        "type": "input_date",
+        "position": "side"
+      },
+      {
+        "field_slug": "users_color",
+        "field_proper": "Color",
+        "field_colors": [
+          "rgb(0, 59, 168)",
+          "rgb(102, 153, 51)",
+          "rgb(53, 109, 211)",
+          "rgb(95, 136, 211)"
+        ],
+        "type": "input_colorpicker"
+      },
+      {
+        "field_slug": "users_editor",
+        "field_proper": "Editor",
+        "type": "input_editor",
+        "position": "normal"
+      },
+      {
+        "field_slug": "users_editor2",
+        "field_proper": "Editor",
+        "type": "input_editor",
+        "position": "normal"
+      },
+      {
+        "field_slug": "users_featured_images",
+        "field_proper": "Featured Images",
+        "type": "input_featured_images",
+        "position": "side"
+      },
+      {
+        "field_slug": "users_featured_images2",
+        "field_proper": "Featured Images",
+        "type": "input_featured_images",
+        "position": "side"
+      },
+      {
+        "field_slug": "users_checkbox_single",
+        "field_proper": "Checkbox Single",
+        "field_text": "Is Checked?",
+        "type": "input_checkbox_single"
+      },
+      {
+          "field_slug": "users_checkbox_multi",
+          "field_proper": "Checkbox Multi",
+          "field_post_type": "people",
+          "type": "input_checkbox_multi"
+      },
+      {
+          "field_slug": "users_checkbox_multi2",
+          "field_proper": "Checkbox Multi",
+          "field_post_type": "people",
+          "type": "input_checkbox_multi"
+      },
+      {
+          "field_slug": "users_select",
+          "field_proper": "Select",
+          "field_post_type": "people",
+          "type": "input_select"
+      },
+      {
+          "field_slug": "users_select2",
+          "field_proper": "Select",
+          "field_post_type": "people",
+          "type": "input_select"
+      },
+      {
+        "field_slug": "users_radio",
+        "field_proper": "Radio",
+        "field_post_type": "people",
+        "type": "input_radio"
+      },
+      {
+        "field_slug": "users_radio2",
+        "field_proper": "Radio",
+        "field_post_type": "people",
+        "type": "input_radio"
       }
     ]
   },

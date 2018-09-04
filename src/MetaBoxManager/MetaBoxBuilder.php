@@ -139,8 +139,6 @@
 
     public function createMetaBox($params = array()){
 
-      $params['isset'] = false;
-
       $this->addMetaBoxes($params);
       $this->savePost($params);
 
@@ -153,6 +151,70 @@
         ));
 
       });
+
+    }
+
+    public function createUserMetaBoxes($params = array()){
+
+      $context = $this;
+
+      add_action( 'show_user_profile', function($user_data) use ($context, $params){
+        $context->createUserProfile($user_data, $params);
+      });
+
+      add_action( 'edit_user_profile', function($user_data) use ($context, $params){
+        $context->createUserProfile($user_data, $params);
+      });
+
+      add_action( 'personal_options_update', function($user_id) use ($context, $params){
+        $context->updateUserData($user_id, $params);
+      });
+      add_action( 'edit_user_profile_update', function($user_id) use ($context, $params){
+        $context->updateUserData($user_id, $params);
+      });
+
+    }
+
+    public function createUserProfile($user_data = array(), $params = array()){
+
+      $userInputs = '';
+
+      ob_start();
+
+      foreach ($this->fields as $key_fields => $value_fields) {
+        $this->createUserMetaBox($user_data, $value_fields);
+      }
+
+      $userInputs .= ob_get_clean();
+
+      include('views/user_form.php');
+
+    }
+
+    public function createUserMetaBox($user_data = array(), $params = array()){
+
+      $field_proper = $params['field_proper'];
+      $field_slug = $params['field_slug'];
+
+      ob_start();
+      $this->generateMetaBox($user_data, $params);
+      $field_input = ob_get_clean();
+
+      include('views/user_input.php');
+
+    }
+
+    public function updateUserData($user_id = 0, $params = array()){
+
+      if ( !current_user_can( 'edit_user', $user_id ) ){
+        return false;
+      }
+
+      foreach ($params as $key_params => $value_params) {
+        $field_slug = $value_params['field_slug'];
+        $field_value = $_POST[$field_slug];
+        update_user_meta( $user_id, $field_slug, $field_value );
+      }
 
     }
 

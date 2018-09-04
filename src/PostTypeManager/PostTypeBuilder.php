@@ -55,11 +55,6 @@
 
     }
 
-    public function bpExtraProfileFields()
-    {
-      echo '123';
-    }
-
 		public function buildPostType($post_type_schema = array()){
 
 			$plural_slug = Slugify::getSlug($post_type_schema['plural']);
@@ -69,8 +64,10 @@
 
         switch ($post_type_schema['plural_slug']) {
           case 'users':
-            add_action( 'show_user_profile', array( $this, 'bpExtraProfileFields' ) );
-            add_action( 'edit_user_profile', array( $this, 'bpExtraProfileFields' ) );
+          
+            $mb_builder = new MetaBoxBuilder($post_type_schema['fields']);
+            $mb_builder->createUserMetaBoxes($mb_builder->fields);
+
           break;
           
           case 'pages':

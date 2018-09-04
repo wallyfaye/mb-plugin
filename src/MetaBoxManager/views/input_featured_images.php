@@ -60,5 +60,6 @@
 
   .imageItem .content{
     height: 140px;
+    background-size: cover;
   }
 </style>
