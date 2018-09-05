@@ -6,8 +6,8 @@
 	*/
 	/*
 		Plugin Name: Model Builder
-		Plugin URI: https://github.com/wallyfaye/bp
-		Description: Create custom post types with meta boxes and REST API endpoints
+		Plugin URI: https://github.com/wallyfaye/mb-plugin
+		Description: Create custom post types and meta boxes with REST API endpoints
 		Author: Wally Faye
 		Version: 0.2
 		Author URI: https://github.com/wallyfaye

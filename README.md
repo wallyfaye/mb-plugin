@@ -1,6 +1,6 @@
 # model builder plugin
 
-code to get started quick
+Create custom Wordpress post types and meta boxes with REST API endpoints
 
 ## composer
 composer install
