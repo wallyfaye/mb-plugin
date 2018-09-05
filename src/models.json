@@ -282,7 +282,7 @@
         "field_slug": "people_checkbox_multi",
         "field_proper": "Checkbox Multi",
         "field_post_type": "people",
-        "field_function": "list_content_box_functions",
+        "field_function": "list_elements_for_feed",
         "type": "input_checkbox_multi"
       },
       {
@@ -295,7 +295,7 @@
         "field_slug": "people_select",
         "field_proper": "Select",
         "field_post_type": "people",
-        "field_function": "list_content_box_functions",
+        "field_function": "list_elements_for_feed",
         "type": "input_select"
       },
       {
@@ -308,7 +308,7 @@
         "field_slug": "people_radio",
         "field_proper": "Radio",
         "field_post_type": "people",
-        "field_function": "list_content_box_functions",
+        "field_function": "list_elements_for_feed",
         "type": "input_radio"
       },
       {

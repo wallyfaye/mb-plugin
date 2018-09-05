@@ -28,7 +28,7 @@
 		$bp->readModelsFile();
 		$bp->buildPostTypes();
 
-		function list_content_box_functions(){
+		function list_elements_for_feed(){
 			$render_array = array(
 				array(
 					"id" => "id1",
