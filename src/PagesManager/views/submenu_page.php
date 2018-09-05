@@ -13,6 +13,9 @@
   		var postType = params.postType;
 
   		var render = {
+        updateContainer: function(){
+          return $('<h5 class="updateContainer">&nbsp;</h5>');
+        },
   			sortableContainer: function(){
   				return $('<ul class="sortableContainer" />');
   			},
@@ -45,6 +48,19 @@
               callback(index == data.responseJSON.custom_order)
             }
           })
+        },
+        updateContainerStatus: function(status){
+          if(status){
+            targetElement.find('.updateContainer').html('updated');
+            setTimeout(function(){
+              targetElement.find('.updateContainer').html('&nbsp;');
+            }, 3000);
+          } else {
+            targetElement.find('.updateContainer').html('error');
+            setTimeout(function(){
+              targetElement.find('.updateContainer').html('&nbsp;');
+            }, 3000);
+          }
         }
       }
 
@@ -57,6 +73,7 @@
             targetElement.find('.titleItem').each(function(index){
 
               set.customOrder($(this).attr('data-id'), index, function(result){
+                set.updateContainerStatus(result);
               });
 
             })
@@ -68,7 +85,10 @@
 
   			get.postTypeData(postType, function(data){
 
-  				var sortableContainer = render.sortableContainer();
+          var updateContainer = render.updateContainer();
+          targetElement.append(updateContainer);
+
+          var sortableContainer = render.sortableContainer();
   				targetElement.append(sortableContainer);
 
           data = data.sort(function (a, b) {
