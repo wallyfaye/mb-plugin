@@ -1,6 +1,5 @@
 # model builder plugin
 
----
 Create custom Wordpress post types and meta boxes with REST API endpoints
 
 ## composer
